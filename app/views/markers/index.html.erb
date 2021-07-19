@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+<%= render 'markers/form', marker: @marker %> 
+
+<h1>Markers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @markers.each do |marker| %>
+      <%= render 'markers/marker', marker: marker  %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Marker', new_marker_path %>
