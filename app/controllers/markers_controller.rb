@@ -23,9 +23,8 @@ class MarkersController < ApplicationController
   # POST /markers or /markers.json
   def create
     @marker = Marker.new(marker_params)
-
     respond_to do |format|
-      if @marker.save
+      if @marker.save!
         format.html { redirect_to @marker, notice: "Marker was successfully created." }
         format.json { render :show, status: :created, location: @marker }
         format.js {render :create}
