@@ -66,6 +66,6 @@ class MarkersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def marker_params
-      params.require(:marker).permit(:name)
+      params.require(:marker).permit(:url, :type_id, :category_id)
     end
 end
