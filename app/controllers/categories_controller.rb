@@ -25,7 +25,6 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        @category.add_categories(params[:type_id][:category_id])
 
         format.html { redirect_to @category, notice: "Category was successfully created." }
         format.json { render :show, status: :created, location: @category }

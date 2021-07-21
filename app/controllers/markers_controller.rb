@@ -13,7 +13,12 @@ class MarkersController < ApplicationController
 
   # GET /markers/new
   def new
-    
+    @marker = Marker.new
+  end
+
+  def marker_category
+    @marker = Marker.where(category: category_params)
+    render json: @marker.as_json(include: :category)
   end
 
   # GET /markers/1/edit
@@ -66,6 +71,10 @@ class MarkersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def marker_params
-      params.require(:marker).permit(:url, {type_id: []}, {category_id: []})
+      params.require(:marker).permit(:url, :name, :type_id, :category_id )
+    end
+
+    def category_params
+      params.require(:category)
     end
 end
