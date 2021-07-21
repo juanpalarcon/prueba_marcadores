@@ -7,4 +7,15 @@ class Category < ApplicationRecord
     # enum status: [:privado, :publico] 
 
 
+    def to_s
+        
+    end
+
+    def status_private
+        if status == true
+            'Privado'
+        else
+            'Publico'
+        end
+    end
 end

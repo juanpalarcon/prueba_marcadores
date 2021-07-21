@@ -10,32 +10,22 @@
     </div>
   <% end %>
   <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="field">
     <%= form.label :url %>
     <%= form.text_field :url %>
   </div>
   <div class="field">
-    <%= form.label :types %>
-    <%= form.collection_check_boxes(:type_id,
-                        Type.all,
-                        :id,
-                        :name) do |b| %>
-      <%= b.label class:"label-checkbox" do%>
-        <%= b.check_box + b.text%>
-      <%end%>
-    <% end %>
+    <%= form.label :type_id %>
+    <%= form.select :type_id, Type.all.collect {|t| [t.name, t.id]}, {} ,id: :marker_type_id, include_blank:false %>
   </div>
   <div class="field">
-    <%= form.label :Categories %>
-    <%= form.collection_check_boxes(:category_id,
-                        Category.all,
-                        :id,
-                        :name) do |b| %>
-      <%= b.label class:"label-checkbox" do%>
-        <%= b.check_box + b.text%>
-      <%end%>
-    <% end %>
+    <%= form.label :category_id %>
+    <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, {} ,id: :marker_category_id, include_blank:false %>
   </div>
   <div class="actions">
-    <%= form.submit data: { confirm: 'Estás seguro?...'} %>
+    <%= form.submit data: { confirm: '¿¿¿estas seguro???' }  %>
   </div>
 <% end %>

@@ -30,7 +30,7 @@ class MarkersController < ApplicationController
     @marker = Marker.new(marker_params)
     respond_to do |format|
       if @marker.save
-        @marker.add_categories(params[:type_id][:category_id])
+
         format.html { redirect_to @marker, notice: "Marker was successfully created." }
         format.json { render :show, status: :created, location: @marker }
         format.js {render :create}
