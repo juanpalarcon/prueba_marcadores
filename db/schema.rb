@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_015501) do
+ActiveRecord::Schema.define(version: 2021_07_21_010503) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2021_07_20_015501) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["category_id"], name: "index_markers_on_category_id"
     t.index ["type_id"], name: "index_markers_on_type_id"
   end

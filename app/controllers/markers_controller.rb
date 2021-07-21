@@ -24,7 +24,8 @@ class MarkersController < ApplicationController
   def create
     @marker = Marker.new(marker_params)
     respond_to do |format|
-      if @marker.save!
+      if @marker.save
+        @marker.add_categories(params[:type_id][:category_id])
         format.html { redirect_to @marker, notice: "Marker was successfully created." }
         format.json { render :show, status: :created, location: @marker }
         format.js {render :create}
@@ -65,6 +66,6 @@ class MarkersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def marker_params
-      params.require(:marker).permit(:url, :type_id, :category_id)
+      params.require(:marker).permit(:url, {type_id: []}, {category_id: []})
     end
 end
