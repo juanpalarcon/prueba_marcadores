@@ -13,18 +13,25 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
+    @categories = Category.all
+
   end
 
   # GET /categories/1/edit
   def edit
+    @categories = Category.all
+
   end
 
   # POST /categories or /categories.json
   def create
     @category = Category.new(category_params)
+    @categories = Category.all
+
 
     respond_to do |format|
       if @category.save
+
         format.html { redirect_to @category, notice: "Category was successfully created." }
         format.json { render :show, status: :created, location: @category }
       else
@@ -64,6 +71,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:name)
+      params.require(:category).permit(:name, :status, :category_id)
     end
 end

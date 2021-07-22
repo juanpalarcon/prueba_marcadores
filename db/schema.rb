@@ -10,18 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_19_233135) do
+ActiveRecord::Schema.define(version: 2021_07_21_010841) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_categories_on_category_id"
   end
 
   create_table "markers", force: :cascade do |t|
-    t.string "name"
+    t.integer "category_id"
+    t.integer "type_id"
+    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["category_id"], name: "index_markers_on_category_id"
+    t.index ["type_id"], name: "index_markers_on_type_id"
   end
 
   create_table "types", force: :cascade do |t|

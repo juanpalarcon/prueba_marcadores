@@ -2,21 +2,31 @@
   <% if marker.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(marker.errors.count, "error") %> prohibited this marker from being saved:</h2>
-
       <ul>
-      <% marker.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% marker.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
+  <%# nostros %>
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, 'Nombre del marcador' %>
     <%= form.text_field :name %>
   </div>
-
+  <div class="field">
+    <%= form.label :url, "Ingrese URL" %>
+    <%= form.url_field :url  %>
+  </div>
+  <div class="field">
+    <%= form.label :type_id, 'Tipo' %>
+    <%= form.select :type_id, Type.all.collect {|t| [t.name, t.id]}, {} ,id: :marker_type_id  %>
+  </div>
+  <div class="field">
+    <%= form.label :category_id, 'Categoria' %>
+    <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, {} ,id: :marker_category_id  %>
+  </div>
   <div class="actions">
-    <%= form.submit data: { confirm: 'Estás seguro xuxetumare?...'} %>
+    <%= form.submit data: { confirm: '¿estas seguro?' }  %>
   </div>
 <% end %>

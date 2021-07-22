@@ -9,23 +9,32 @@ class MarkersController < ApplicationController
 
   # GET /markers/1 or /markers/1.json
   def show
+    @types = Type.all
+
   end
 
   # GET /markers/new
   def new
-    
+    @marker = Marker.new
+  end
+
+  def marker_category
+    @marker = Marker.where(category: category_params)
+    render json: @marker.as_json(include: :category)
   end
 
   # GET /markers/1/edit
   def edit
+    @types = Type.all
+    @categories = Category.all
   end
 
   # POST /markers or /markers.json
   def create
     @marker = Marker.new(marker_params)
-
     respond_to do |format|
       if @marker.save
+
         format.html { redirect_to @marker, notice: "Marker was successfully created." }
         format.json { render :show, status: :created, location: @marker }
         format.js {render :create}
@@ -34,6 +43,8 @@ class MarkersController < ApplicationController
         format.json { render json: @marker.errors, status: :unprocessable_entity }
       end
     end
+    @types = Type.all
+
   end
 
   # PATCH/PUT /markers/1 or /markers/1.json
@@ -51,6 +62,7 @@ class MarkersController < ApplicationController
 
   # DELETE /markers/1 or /markers/1.json
   def destroy
+    @types = Type.all
     @marker.destroy
     respond_to do |format|
       format.html { redirect_to markers_url, notice: "Marker was successfully destroyed." }
@@ -66,6 +78,10 @@ class MarkersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def marker_params
-      params.require(:marker).permit(:name)
+      params.require(:marker).permit(:url, :name, :type_id, :category_id )
     end
+
+    # def category_params
+    #   params.require(:category)
+    # end
 end

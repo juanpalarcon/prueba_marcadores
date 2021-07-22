@@ -1,21 +1,26 @@
-<%= form_with(model: category, local: true) do |form| %>
+<%= form_with(model: category, remote: true) do |form| %>
   <% if category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
-
       <ul>
-      <% category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
-
+  <div class="field">
+    <%= form.label :status, '¿Quieres que tu categoria sea privada?' %>
+    <%= form.check_box :status %>
+  </div>
+  <div class="field">
+    <%= form.label :parent_category %>
+    <%= form.select :category_id, @categories.map { |category| [category.name, category.id] }, prompt: "Seleccione una opción" %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>
