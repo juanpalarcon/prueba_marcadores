@@ -9,6 +9,8 @@ class MarkersController < ApplicationController
 
   # GET /markers/1 or /markers/1.json
   def show
+    @types = Type.all
+
   end
 
   # GET /markers/new
@@ -23,6 +25,8 @@ class MarkersController < ApplicationController
 
   # GET /markers/1/edit
   def edit
+    @types = Type.all
+    @categories = Category.all
   end
 
   # POST /markers or /markers.json
@@ -39,6 +43,8 @@ class MarkersController < ApplicationController
         format.json { render json: @marker.errors, status: :unprocessable_entity }
       end
     end
+    @types = Type.all
+
   end
 
   # PATCH/PUT /markers/1 or /markers/1.json
@@ -56,6 +62,7 @@ class MarkersController < ApplicationController
 
   # DELETE /markers/1 or /markers/1.json
   def destroy
+    @types = Type.all
     @marker.destroy
     respond_to do |format|
       format.html { redirect_to markers_url, notice: "Marker was successfully destroyed." }
@@ -74,7 +81,7 @@ class MarkersController < ApplicationController
       params.require(:marker).permit(:url, :name, :type_id, :category_id )
     end
 
-    def category_params
-      params.require(:category)
-    end
+    # def category_params
+    #   params.require(:category)
+    # end
 end

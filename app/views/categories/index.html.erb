@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Status</th>
-      <th>Sub-categoria</th>
+      <th>Categoria Padre</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,7 +14,14 @@
       <tr>
         <td><%= category.name %></td>
         <td><%= category.status_private %></td>
-        <td><%= category.category_id.to_s  %></td>
+        <td>
+          <%= if category.parent
+                  category.parent.name 
+                else 
+                  'No tiene categoria padre'
+                end 
+          %>
+        </td>
         <td><%= link_to 'Show', category %></td>
         <td><%= link_to 'Edit', edit_category_path(category) %></td>
         <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>

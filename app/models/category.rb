@@ -6,11 +6,10 @@ class Category < ApplicationRecord
 
     # enum status: [:privado, :publico] 
 
+    validates :name, presence: true,  uniqueness: { case_sensitive: false }
+    validates :status, presence: true
+    # validates :name, uniqueness: { case_sensitive: false }
 
-    def to_s
-        name
-        
-    end
 
     def status_private
         if status == true
