@@ -41,3 +41,5 @@ Como desarrollador de software, te han encargado hacer lo siguiente:
 5. Inicialmente, nuestro sistema debe contener al menos 20 registros predefinidos.
 6. Mostrar un gráfico de torta que muestre cómo están distribuidos los tipos de
    marcadores.
+
+- ruta endpoint http://localhost:3000/categories/marker_category/1

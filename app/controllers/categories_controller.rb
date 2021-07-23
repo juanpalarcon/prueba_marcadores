@@ -11,11 +11,31 @@ class CategoriesController < ApplicationController
   end
 
   def marker_category
-    @marker = Marker.all
+    @categories = Category.all 
+    @markers = Marker.all
+    j_name = "Categoria"
+    b_name = "Marcador"
+    s_name = "subcategoria"
+    categoria = []
+    marcador = []
+    global = []
+    
+    @categories.each do |cat|
+      c_id = cat.id
+      c_name = cat.name
+      c_status = cat.status
+      s_cat = cat.parent
+      categoria.push(["#{j_name}",[id: c_id, name: c_name, status: c_status ], "#{s_name}",[category_id: s_cat]])
 
-
-    render json: @marker.as_json(include: :category)
-
+    end     
+    @markers.each do |mark|
+      m_name = mark.name
+      m_url = mark.url
+      m_cat = mark.category_id
+      marcador.push(["#{b_name}",[name: m_name, url: m_url, category_id: m_cat]]).last
+    end
+    render json: marcador.push(categoria).as_json
+    
   end
 
   # GET /categories/new
