@@ -10,6 +10,14 @@ class CategoriesController < ApplicationController
   def show
   end
 
+  def marker_category
+    @marker = Marker.all
+
+
+    render json: @marker.as_json(include: :category)
+
+  end
+
   # GET /categories/new
   def new
     @category = Category.new

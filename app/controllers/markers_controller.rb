@@ -18,10 +18,7 @@ class MarkersController < ApplicationController
     @marker = Marker.new
   end
 
-  def marker_category
-    @marker = Marker.where(category: category_params)
-    render json: @marker.as_json(include: :category)
-  end
+
 
   # GET /markers/1/edit
   def edit
@@ -83,7 +80,7 @@ class MarkersController < ApplicationController
       params.require(:marker).permit(:url, :name, :type_id, :category_id )
     end
 
-    # def category_params
-    #   params.require(:category)
-    # end
+    def category_params
+      params.require(:category)
+    end
 end
