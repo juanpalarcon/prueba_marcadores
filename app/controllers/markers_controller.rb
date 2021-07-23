@@ -58,6 +58,8 @@ class MarkersController < ApplicationController
         format.json { render json: @marker.errors, status: :unprocessable_entity }
       end
     end
+    @types = Type.all
+
   end
 
   # DELETE /markers/1 or /markers/1.json
