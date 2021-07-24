@@ -15,7 +15,7 @@
   </div>
   <div class="field">
     <%= form.label :status, '¿Quieres que tu categoria sea privada?' %>
-    <%= form.check_box :status %>
+    <%= form.select :status, {"Privado" => true, "Público" => false}%>
   </div>
   <div class="field">
     <%= form.label :parent_category %>

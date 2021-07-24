@@ -4,11 +4,10 @@ class Category < ApplicationRecord
     has_many :markers, dependent: :destroy
 
 
-    # enum status: [:privado, :publico] 
 
-    # validates :name, presence: true,  uniqueness: { case_sensitive: false }
-    # validates :status, presence: true
-    # validates :name, uniqueness: { case_sensitive: false }
+    validates :name, presence: true,  uniqueness: { case_sensitive: false }
+
+    validates :name, uniqueness: { case_sensitive: false }
 
 
     def status_private

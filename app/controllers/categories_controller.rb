@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[ show edit update destroy  ]
 
   # GET /categories or /categories.json
   def index
@@ -11,30 +11,46 @@ class CategoriesController < ApplicationController
   end
 
   def marker_category
-    @categories = Category.all 
+    @category_marker = Category.where(status: false )
     @markers = Marker.all
     j_name = "Categoria"
     b_name = "Marcador"
     s_name = "subcategoria"
     categoria = []
     marcador = []
-    global = []
+    general = {}
+
     
-    @categories.each do |cat|
-      c_id = cat.id
-      c_name = cat.name
-      c_status = cat.status
-      s_cat = cat.parent
-      categoria.push(["#{j_name}",[id: c_id, name: c_name, status: c_status ], "#{s_name}",[category_id: s_cat]])
+    @category_marker.each do |cat|
+      object_category= {
+        type: j_name,
+        id: cat.id,
+        name: cat.name,
+        status: cat.status == false ? 'publico' : 'privado',
+        sub_category: cat.parent
+      
+      
+      } 
+
+      categoria.push(object_category)
 
     end     
+    general[:categorias] = categoria 
+
     @markers.each do |mark|
-      m_name = mark.name
-      m_url = mark.url
-      m_cat = mark.category_id
-      marcador.push(["#{b_name}",[name: m_name, url: m_url, category_id: m_cat]]).last
+      object_marker = {
+        type: b_name,
+        name: mark.name,
+        url: mark.url,
+        category_id: mark.category_id
+
+
+      }
+      marcador.push(object_marker)
     end
-    render json: marcador.push(categoria).as_json
+    general[:marcadores] = marcador 
+
+    render json: general
     
   end
 
@@ -71,10 +87,23 @@ class CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
+
+
     respond_to do |format|
       if @category.update(category_params)
+        unless @category.children.empty?
+          @category.children.each do |child|
+
+            child.status = @category.status
+            child.save
+
+          end
+        end
+
         format.html { redirect_to @category, notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
+
+
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }

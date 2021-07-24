@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :categories
 
 
-  get 'categories/marker_category/:json_id' , to: 'categories#marker_category'
+  get 'marker_category/' , to: 'categories#marker_category'
 
 
   root 'markers#index'
