@@ -2,7 +2,7 @@ class Type < ApplicationRecord
     has_many :markers, dependent: :destroy
 
 
-    # validates :name, presence: true,  uniqueness: { case_sensitive: false }
+
 
     def self.type_grafico
         marker = Marker.all.group(:type).count
