@@ -78,16 +78,19 @@ class CategoriesController < ApplicationController
 
         format.html { redirect_to @category, notice: "Category was successfully created." }
         format.json { render :show, status: :created, location: @category }
+        format.js
+
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.js {render :new}
+
       end
     end
   end
 
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
-
 
     respond_to do |format|
       if @category.update(category_params)
@@ -102,11 +105,15 @@ class CategoriesController < ApplicationController
 
         format.html { redirect_to @category, notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
+        format.js
+
 
 
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.js { render :edit}
+
       end
     end
   end
@@ -117,6 +124,8 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
+      format.js
+
     end
   end
 

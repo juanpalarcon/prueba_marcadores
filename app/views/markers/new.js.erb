@@ -1,0 +1,6 @@
+// Add the dialog title
+$('#modal-markers-title').html("Nuevo Marker");
+// Render the new form
+$('#modal-body-markers').html('<%= j render 'markers/form', marker: @marker %>');
+// Show the dynamic dialog
+$('#modalMarkers').modal("show");

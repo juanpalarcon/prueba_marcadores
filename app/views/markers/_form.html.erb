@@ -10,23 +10,23 @@
     </div>
   <% end %>
   <%# nostros %>
-  <div class="field">
+  <div class="field mb-2">
     <%= form.label :name, 'Nombre del marcador' %>
     <%= form.text_field :name %>
   </div>
-  <div class="field">
+  <div class="field mb-2">
     <%= form.label :url, "Ingrese URL" %>
     <%= form.url_field :url  %>
   </div>
-  <div class="field">
+  <div class="field mb-2">
     <%= form.label :type_id, 'Tipo' %>
     <%= form.select :type_id, Type.all.collect {|t| [t.name, t.id]}, {} ,id: :marker_type_id  %>
   </div>
-  <div class="field">
+  <div class="field mb-2">
     <%= form.label :category_id, 'Categoria' %>
     <%= form.select :category_id, Category.all.collect {|c| [c.name, c.id]}, {} ,id: :marker_category_id  %>
   </div>
   <div class="actions">
-    <%= form.submit data: { confirm: '¿estas seguro?' }  %>
+    <%= form.submit class:'btn btn-primary', data: { confirm: '¿estas seguro?' }  %>
   </div>
 <% end %>

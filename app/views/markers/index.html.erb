@@ -1,20 +1,37 @@
-<p id="notice"><%= notice %></p>
-<%= render 'markers/form', marker: @marker %>
-<h1>Markers</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Category</th>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @markers.each do |marker| %>
-      <%= render 'markers/marker', marker: marker  %>
-    <% end %>
-  </tbody>
-</table>
-<br>
+<div id="resultados">
+</div>
+<%= form_tag "/search/create", method: :get, remote: true, id: "search-form" do %>
+  <%= text_field_tag :keyword, nil, placeholder: "Qué estás buscando"  %>
+  <%= content_tag :button, type: :submit do %>
+    Buscar
+  <% end %>
+<% end %>
+<div class="card col-xs">
+  <div class="card-header d-flex justify-content-start">
+    <div class="m-0">
+      <%= link_to new_marker_path, {remote: true, class: "btn btn-success text-left", id: "anadir-marker-btn"}  do %>
+        <span class="fas fa-plus-square" ></span>
+      <% end %>
+    </div>
+    <h1 class="h3 mx-5 text-gray-800 text-center">Markers</h1>
+  </div>
+</div>
+<div class="card m-2 " >
+  <table class="table border-primary">
+    <thead>
+      <tr>
+        <th class="text-center">Name</th>
+        <th class="text-center">Type</th>
+        <th class="text-center">Category</th>
+        <th class="text-center">Url</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @markers.each do |marker| %>
+        <%= render 'markers/marker', marker: marker %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= render 'modal_marker' %>

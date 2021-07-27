@@ -1,0 +1,9 @@
+<tr id="type_<%= type.id %>">
+  <td><%= type.name %></td>
+  <td><%= link_to 'Show', type, class:"btn btn-primary", remote: true %></td>
+  <td><%= link_to 'Edit', edit_type_path(type), class:"btn btn-success", remote: true %></td>
+  <td><%= link_to type, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger", remote: true do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %></td>
+</td>
+</tr>

@@ -1,0 +1,7 @@
+<h6><strong>Categoria: </strong><%= @category.name %></h6>
+<h6><strong>Nombre Tipo: </strong><%= @category.status_private %></h6>
+<h6><strong>Nombre de Categoria: </strong><%=   if @category.parent
+                                                    @category.parent.name 
+                                                else 
+                                                    'No tiene categoria padre'
+                                                end  %></h6>
